@@ -1,0 +1,27 @@
+--- 
+services: 
+  pgadmin: 
+    environment: 
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=devops
+    image: dpage/pgadmin4
+    ports: 
+      - "5050:80"
+    restart: always
+    volumes: 
+      - "pgadmin:/root/.pgadmin"
+  postgresql_database: 
+    environment: 
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=devops
+      - POSTGRES_DB=productDb
+    image: "postgres:latest"
+    ports: 
+      - "5432:5432"
+    restart: always
+    volumes: 
+      - "database-data:/var/lib/postgresql/data/"
+version: "3.8"
+volumes: 
+  database-data: ~
+  pgadmin: ~
